@@ -1,0 +1,65 @@
+
+    <p id='notice'>
+        <%= flash[:success2] %>
+    </p>
+    <h1 class='h12'>Books</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Body</th>
+                <th colspan="3"></th>
+            </tr>
+        </thead>
+        <tbody>
+              <%  @books.each do |book| %>
+                <tr>
+                    <td><%= book.title %></td>
+                    <td><%= book.body %></td>
+                    <td>
+                        <p class='index-a'>
+                            <%= link_to "Show",book_path(book.id) %>
+                        </p>
+                    </td>
+                    <td>
+                        <p class='index-a'>
+                            <%= link_to "Edit", edit_book_path(book.id) %>
+                        </p>
+                    </td>
+                    <td>
+                        <p class='index-a'>
+                             <%= link_to "Destroy", destroy_book_path(book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+                        </p>
+                    </td>
+                </tr>
+              <% end %>
+
+        </tbody>
+    </table>
+    <h2 class='h12'>New book</h2>
+    <!--url: '/books', method: :post-->
+    <% if @book.errors.any? %>
+      <div class='error'>
+        <h2 class='errorh2'>
+          <%= @book.errors.count %> error prohibited this book from being saved:
+        </h2>
+        <ul class='errorul'>
+          <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= form_with model: @book do |f|  %>
+    <div class='index-newbook'>
+      <p>Title</p>
+      <%= f.text_field :title %>
+    </div>
+    <div class='index-newbook'>
+      <p>Body</p>
+      <%= f.text_area :body %>
+    </div>
+    <div class='index-newbook'>
+      <%= f.submit 'Create Book' %>
+    </div>
+    <% end %>

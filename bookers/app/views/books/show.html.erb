@@ -1,0 +1,20 @@
+<p id='notice'>
+    <%= flash[:success] %>
+</p>
+<p class='box'>
+    <straong>Titel:</straong>
+    <%= @book.title %>
+</p>
+
+<p class='box'>
+    <straong>Body:</straong>
+    <%= @book.body %>
+
+</p>
+
+<div>
+     <%= link_to "Edit", edit_book_path(@book.id) %>
+     |
+     <%= link_to 'Back', '/books' %>
+
+</div>
